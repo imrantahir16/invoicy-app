@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./App.css";
-import Button from "./components/button/Button";
+import PageLoading from "./components/common/PageLoading";
+import Button from "./components/UI/Button";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
@@ -12,7 +12,7 @@ function App() {
     });
   };
   return (
-    <div className="App">
+    <div className="">
       <header className={isMenuOpen ? "header header-nav-open" : "header"}>
         <button onClick={menuOpen}>Menu</button>
         <span>Invoicy</span>
@@ -33,7 +33,12 @@ function App() {
           }
         >
           Dashboard content
-          <Button size="small">Click me</Button>
+          <div className="mt-3 flex align-center justify-center">
+            <Button outlined={1} success={1}>
+              Click me
+            </Button>
+          </div>
+          <PageLoading />
         </div>
       </div>
     </div>

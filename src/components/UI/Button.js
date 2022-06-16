@@ -18,32 +18,32 @@ const Button = (props) => {
       "rounded-xl font-title text-white flex flex-row items-center justify-center";
 
     if (block) {
-      defaultClasses += "block w-full";
+      defaultClasses += " block w-full ";
     }
 
     if (size === "small") {
-      defaultClasses += "text-sm h-8 px-2";
+      defaultClasses += " text-sm h-8 px-2 ";
     } else {
-      defaultClasses += "h-12 px-4";
+      defaultClasses += " h-12 px-4 ";
     }
 
     if (outlined) {
       if (success) {
-        defaultClasses += "border border-green-600 text-green-600";
+        defaultClasses += " border border-green-600 text-green-600 ";
       } else if (secondary) {
-        defaultClasses += "border border-grey-400 text-grey-400";
+        defaultClasses += " border border-gray-400 text-gray-400 ";
       } else if (danger) {
-        defaultClasses += "border border-red-500 text-red-500";
+        defaultClasses += " border border-red-500 text-red-500 ";
       }
     } else {
       if (success) {
-        defaultClasses += "bg-green-600";
+        defaultClasses += " bg-green-600 ";
       } else if (secondary) {
-        defaultClasses += "bg-grey-400";
+        defaultClasses += " bg-gray-400 ";
       } else if (danger) {
-        defaultClasses += "bg-red-500";
+        defaultClasses += " bg-red-500 ";
       } else {
-        defaultClasses += "primary-background-color";
+        defaultClasses += " primary-background-color";
       }
     }
     return defaultClasses;
