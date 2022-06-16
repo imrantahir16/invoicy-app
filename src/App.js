@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Button from "./components/button/Button";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
+
+  const menuOpen = () => {
+    setIsMenuOpen((prevState) => {
+      prevState = !prevState;
+      return prevState;
+    });
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className={isMenuOpen ? "header header-nav-open" : "header"}>
+        <button onClick={menuOpen}>Menu</button>
+        <span>Invoicy</span>
+        <button>Setting</button>
       </header>
+      <div>
+        <nav className={isMenuOpen ? "nav" : "nav-closed"}>
+          <ul>
+            <li>Dashboard</li>
+            <li>invoices</li>
+            <li>Clients</li>
+            <li>Products</li>
+          </ul>
+        </nav>
+        <div
+          className={
+            isMenuOpen ? "dashboard dashboard-nav-opened" : "dashboard"
+          }
+        >
+          Dashboard content
+          <Button size="small">Click me</Button>
+        </div>
+      </div>
     </div>
   );
 }
