@@ -1,47 +1,22 @@
-import { useState } from "react";
-import PageLoading from "./components/common/PageLoading";
-import Button from "./components/UI/Button";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import AppContainer from "./components/container/AppContainer";
+import HomePage from "./pages/HomePage";
+// import { useState } from "react";
+// import ClientTable from "./components/clients/ClientTable";
+// import QuickAddClient from "./components/clients/QuickAddClient";
+// // eslint-disable-next-line
+// import PageLoading from "./components/common/PageLoading";
+// import Button from "./components/UI/Button";
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-
-  const menuOpen = () => {
-    setIsMenuOpen((prevState) => {
-      prevState = !prevState;
-      return prevState;
-    });
-  };
   return (
-    <div className="">
-      <header className={isMenuOpen ? "header header-nav-open" : "header"}>
-        <button onClick={menuOpen}>Menu</button>
-        <span>Invoicy</span>
-        <button>Setting</button>
-      </header>
-      <div>
-        <nav className={isMenuOpen ? "nav" : "nav-closed"}>
-          <ul>
-            <li>Dashboard</li>
-            <li>invoices</li>
-            <li>Clients</li>
-            <li>Products</li>
-          </ul>
-        </nav>
-        <div
-          className={
-            isMenuOpen ? "dashboard dashboard-nav-opened" : "dashboard"
-          }
-        >
-          Dashboard content
-          <div className="mt-3 flex align-center justify-center">
-            <Button outlined={1} success={1}>
-              Click me
-            </Button>
-          </div>
-          <PageLoading />
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <AppContainer>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </AppContainer>
+    </BrowserRouter>
   );
 }
 
