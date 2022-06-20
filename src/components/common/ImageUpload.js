@@ -29,6 +29,7 @@ const ImageUpload = (props) => {
       reader.readAsDataURL(file);
       reader.onload = function () {
         if (onImageChange) {
+          console.log(reader.result);
           onImageChange(reader.result);
         }
         e.target.value = null;
@@ -57,7 +58,7 @@ const ImageUpload = (props) => {
       />
       <div className={classes} onClick={onImageClicked}>
         {url ? (
-          <img src={props.url} alt="upload" />
+          <img className="h-14 w-14 object-cover" src={url} alt="upload" />
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"

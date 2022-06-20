@@ -11,6 +11,7 @@ const Button = (props) => {
     success = false,
     secondary = false,
     danger = false,
+    type = "button",
   } = props;
 
   const buttonClasses = useMemo(() => {
@@ -50,6 +51,7 @@ const Button = (props) => {
   }, [block, size, outlined, success, secondary, danger]);
   return (
     <motion.button
+      type={type}
       whileHover={{
         scale: size === "small" ? 1.02 : 1.04,
         transition: {
@@ -59,7 +61,6 @@ const Button = (props) => {
         },
       }}
       whileTap={{ scale: 0.9 }}
-      type="button"
       className={buttonClasses}
       {...props}
     >
