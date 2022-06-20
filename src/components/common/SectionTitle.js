@@ -5,7 +5,7 @@ const SectionTitle = (props) => {
 
   const classes = useMemo(() => {
     if (className) {
-      defaultClasses + " " + className;
+      return defaultClasses + " " + className;
     }
     return defaultClasses;
   }, [className]);

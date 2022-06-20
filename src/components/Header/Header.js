@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useAppContext } from "../../context/AppContext";
+import InvoicyIcon from "../InvoicyIcon/InvoicyIcon";
 const Header = () => {
-  const { toggleNavBar, showNavBar } = useAppContext();
+  const { toggleNavBar, showNavBar, darkTheme, toggleTheme } = useAppContext();
   const classes = useMemo(() => {
     if (showNavBar) {
       return "pl-72";
@@ -53,11 +54,12 @@ const Header = () => {
             className="relative flex flex-row items-center justify-center px-2 font-title text-2xl font-bold"
             initial={{
               translateX: "10vw",
-              opacity: 0,
+              opacity: 0.5,
             }}
             animate={{
               translateX: 0,
               opacity: 1,
+              color: "rgb(0, 102, 255)",
             }}
             transition={{
               type: "spring",
@@ -65,13 +67,27 @@ const Header = () => {
             }}
           >
             Invoicy
+            <InvoicyIcon loop className="nav-loading-right ml-4" />
           </motion.div>
         )}
       </div>
 
-      <button className="h-8 w-8 pr-12">
-        <FontAwesomeIcon className="h-8 w-8" icon={faSun} />
-      </button>
+      <motion.button
+        className="pr-12"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={toggleTheme}
+        initial={{ rotate: 0 }}
+        animate={{
+          rotate: darkTheme ? "360deg" : "360deg",
+        }}
+      >
+        <FontAwesomeIcon
+          className="h-8 w-8 text-blue-500"
+          icon={darkTheme ? faMoon : faSun}
+          // color={"#0066FF"}
+        />
+      </motion.button>
     </header>
   );
 };
