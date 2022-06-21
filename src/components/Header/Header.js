@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useAppContext } from "../../context/AppContext";
 import InvoicyIcon from "../InvoicyIcon/InvoicyIcon";
+import useDarkMode from "../../hooks/useDarkMode";
 const Header = () => {
-  const { toggleNavBar, showNavBar, darkTheme, toggleTheme } = useAppContext();
+  const { toggleNavBar, showNavBar } = useAppContext();
+  const [darkMode, setDarkMode] = useDarkMode();
   const classes = useMemo(() => {
     if (showNavBar) {
       return "pl-72";
@@ -13,17 +15,23 @@ const Header = () => {
     return "pl-3";
   }, [showNavBar]);
 
+  const toggleTheme = () => setDarkMode(!darkMode);
+
   return (
     <header
-      className={`z-12 fixed z-10 flex w-full items-center border-b border-slate-50 bg-white pr-3 transition-all ${classes}`}
+      className={`z-12 fixed z-10 flex w-full items-center border-b border-slate-50 bg-white pr-3 transition-all dark:bg-slate-700 ${classes}`}
     >
       <motion.button
-        className="rounded-md p-4 focus:outline-none"
+        className="rounded-md p-4 focus:outline-none dark:text-sky-100"
         initial={{
           translateX: 0,
         }}
         animate={{
-          color: showNavBar ? "#777" : "#0066FF",
+          color: darkMode
+            ? "rgb(224,242,254)"
+            : showNavBar
+            ? "#777"
+            : "#0066FF",
           rotate: showNavBar ? "360deg" : "0deg",
         }}
         transition={{
@@ -59,7 +67,7 @@ const Header = () => {
             animate={{
               translateX: 0,
               opacity: 1,
-              color: "rgb(0, 102, 255)",
+              color: darkMode ? "rgb(224,242,254)" : "rgb(0, 102, 255)",
             }}
             transition={{
               type: "spring",
@@ -73,18 +81,18 @@ const Header = () => {
       </div>
 
       <motion.button
-        className="pr-12"
+        className="mr-12 p-2"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={toggleTheme}
         initial={{ rotate: 0 }}
         animate={{
-          rotate: darkTheme ? "360deg" : "360deg",
+          rotate: darkMode ? "360deg" : "360deg",
         }}
       >
         <FontAwesomeIcon
-          className="h-8 w-8 text-blue-500"
-          icon={darkTheme ? faMoon : faSun}
+          className="h-8 w-8 text-blue-500 dark:text-sky-100"
+          icon={darkMode ? faSun : faMoon}
           // color={"#0066FF"}
         />
       </motion.button>
