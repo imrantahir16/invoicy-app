@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useId, useEffect } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import ImageUpload from "../common/ImageUpload";
 import SectionTitle from "../common/SectionTitle";
 import Button from "../UI/Button";
@@ -12,6 +12,7 @@ import {
   defaultInputStyle,
 } from "../../constants/defaultStyles";
 import Skeleton from "react-loading-skeleton";
+import { nanoid } from "nanoid";
 
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const phoneRegex =
@@ -64,7 +65,6 @@ const QuickAddClient = () => {
     //dispatch client data
   };
 
-  const clientId = useId();
   const submitClientHandler = useCallback(
     (e) => {
       e.preventDefault();
@@ -75,11 +75,11 @@ const QuickAddClient = () => {
         console.log("not Valid");
         return;
       }
-      console.log({ id: clientId, ...clientForm });
+      console.log({ ...clientForm, id: nanoid() });
       console.log("submitted");
       setIsInputTouched(false);
     },
-    [validForm, clientForm, clientId]
+    [validForm, clientForm]
   );
 
   useEffect(() => {
