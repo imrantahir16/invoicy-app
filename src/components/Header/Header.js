@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header
-      className={`z-12 fixed z-10 flex w-full items-center border-b border-slate-50 bg-white pr-3 transition-all dark:bg-slate-700 ${classes}`}
+      className={`z-12 fixed z-10 flex w-full items-center border-slate-50 bg-white pr-3 transition-all dark:bg-slate-700 ${classes} shadow-md`}
     >
       <motion.button
         className="rounded-md p-4 focus:outline-none dark:text-sky-100"
@@ -75,7 +75,7 @@ const Header = () => {
             }}
           >
             Invoicy
-            <InvoicyIcon loop className="nav-loading-right ml-4" />
+            <InvoicyIcon loop className="nav-loading-right" />
           </motion.div>
         )}
       </div>

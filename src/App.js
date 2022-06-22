@@ -6,8 +6,16 @@ import ProductListPage from "./pages/products/ProductListPage";
 import InvoicesListPage from "./pages/invoices/InvoicesListPage";
 import InvoiceDetailPage from "./pages/invoices/InvoiceDetailPage";
 import AboutPage from "./pages/products/about/AboutPage";
+import useAppInit from "./hooks/useAppInit";
+import { useEffect } from "react";
 
 function App() {
+  const { initialSetData } = useAppInit();
+
+  useEffect(() => {
+    initialSetData();
+  }, [initialSetData]);
+
   return (
     <BrowserRouter>
       <AppContainer>

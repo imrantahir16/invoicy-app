@@ -12,6 +12,9 @@ const initData = {
   ...AppData,
   toggleNavBar: () => {},
   toggleTheme: () => {},
+  setEscapeOverflow: (boolean) => {},
+  setInitLoading: (boolean) => {},
+  setScreenLoading: (boolean) => {},
 };
 export const AppCtx = createContext(initData);
 
@@ -24,8 +27,8 @@ export const AppContextProvider = ({ children }) => {
         ...prev,
         showNavBar: !prev?.showNavBar,
       };
-      const { showNavBar, darkTheme } = updateData;
-      localforage.setItem("appContext", { showNavBar, darkTheme });
+      const { showNavBar, darkTheme, initLoading } = updateData;
+      localforage.setItem("appContext", { initLoading, showNavBar, darkTheme });
       return updateData;
     });
   }, []);
@@ -42,6 +45,13 @@ export const AppContextProvider = ({ children }) => {
     });
   }, []);
 
+  const setInitLoading = useCallback((boolean) => {
+    setState((prev) => ({
+      ...prev,
+      initLoading: boolean,
+    }));
+  }, []);
+
   useEffect(() => {
     (async () => {
       const appContext = await localforage.getItem("appContext");
@@ -52,7 +62,9 @@ export const AppContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppCtx.Provider value={{ ...state, toggleNavBar, toggleTheme }}>
+    <AppCtx.Provider
+      value={{ ...state, toggleNavBar, toggleTheme, setInitLoading }}
+    >
       {children}
     </AppCtx.Provider>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import invoicyIcon from "../../lotties/invoicy-icon.json";
+import invoicyIcon from "../../lotties/new-invoice.json";
 import Lottie from "lottie-react";
 
 const InvoicyIcon = (props) => {

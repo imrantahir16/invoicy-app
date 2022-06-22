@@ -37,7 +37,7 @@ const NAV_DATA = [
 ];
 
 const navDefaultClasses =
-  "fixed inset-0 duration-200 transform lg:opacity-100 z-10 w-72 bg-white h-screen p-3";
+  "fixed inset-0 duration-200 transform lg:opacity-100 z-10 w-72 bg-white h-screen p-3 border border-r-1";
 
 const navItemDefaultClasses = "block px-4 py-2 rounded-md flex flex-1";
 
@@ -75,9 +75,9 @@ const NavBar = () => {
             damping: 18,
           }}
         >
-          <span className="nav-loading mr-4">
-            <InvoicyIcon loop />
-          </span>
+          {/* <span> */}
+          <InvoicyIcon loop className="nav-loading" />
+          {/* </span> */}
           Invoicy
         </motion.span>
       </div>
