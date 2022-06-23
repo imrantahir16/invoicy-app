@@ -16,7 +16,7 @@ const Button = (props) => {
 
   const buttonClasses = useMemo(() => {
     let defaultClasses =
-      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center focus:outline-none focus:ring ";
+      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center focus:outline-none focus:ring";
 
     if (block) {
       defaultClasses += " block w-full focus:ring-blue-400";

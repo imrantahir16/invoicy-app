@@ -188,7 +188,7 @@ const QuickAddClient = () => {
         </div>
       </div>
       <div className="mt-2">
-        <Button type="submit" block={1}>
+        <Button type="submit" block="true">
           <span className="ml-2 inline-block ">Submit</span>
         </Button>
       </div>

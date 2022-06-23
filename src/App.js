@@ -5,7 +5,7 @@ import ClientsListPage from "./pages/clients/ClientListPage";
 import ProductListPage from "./pages/products/ProductListPage";
 import InvoicesListPage from "./pages/invoices/InvoicesListPage";
 import InvoiceDetailPage from "./pages/invoices/InvoiceDetailPage";
-import AboutPage from "./pages/products/about/AboutPage";
+import AboutPage from "./pages/about/AboutPage";
 import useAppInit from "./hooks/useAppInit";
 import { useEffect } from "react";
 
