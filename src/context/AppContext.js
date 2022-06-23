@@ -52,18 +52,36 @@ export const AppContextProvider = ({ children }) => {
     }));
   }, []);
 
+  const setScreenLoading = useCallback((boolean) => {
+    setState((prev) => {
+      return { ...prev, screenLoading: boolean };
+    });
+  }, []);
+  const setEscapeOverflow = useCallback((boolean) => {
+    setState((prev) => {
+      return { ...prev, escapeOverflow: boolean };
+    });
+  }, []);
+
   useEffect(() => {
     (async () => {
       const appContext = await localforage.getItem("appContext");
       if (appContext) {
-        setState((prev) => ({ ...prev, showNavbar: appContext.showNavBar }));
+        setState((prev) => ({ ...prev, showNavBar: appContext.showNavBar }));
       }
     })();
   }, []);
 
   return (
     <AppCtx.Provider
-      value={{ ...state, toggleNavBar, toggleTheme, setInitLoading }}
+      value={{
+        ...state,
+        toggleNavBar,
+        toggleTheme,
+        setInitLoading,
+        setEscapeOverflow,
+        setScreenLoading,
+      }}
     >
       {children}
     </AppCtx.Provider>
