@@ -16,10 +16,10 @@ const Button = (props) => {
 
   const buttonClasses = useMemo(() => {
     let defaultClasses =
-      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center";
+      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center focus:outline-none focus:ring ";
 
     if (block) {
-      defaultClasses += " block w-full ";
+      defaultClasses += " block w-full focus:ring-blue-400";
     }
 
     if (size === "small") {
@@ -30,19 +30,22 @@ const Button = (props) => {
 
     if (outlined) {
       if (success) {
-        defaultClasses += " border border-green-600 text-green-600 ";
+        defaultClasses +=
+          " border border-green-500 text-green-600 focus:ring-green-600 ";
       } else if (secondary) {
-        defaultClasses += " border border-gray-400 text-gray-400 ";
+        defaultClasses +=
+          " border border-gray-400 text-gray-600 focus:ring-gray-600 ";
       } else if (danger) {
-        defaultClasses += " border border-red-500 text-red-500 ";
+        defaultClasses +=
+          " border border-red-400 text-red-500 focus:ring-red-500 ";
       }
     } else {
       if (success) {
-        defaultClasses += " bg-green-600 ";
+        defaultClasses += " bg-green-500 focus:ring-green-600";
       } else if (secondary) {
-        defaultClasses += " bg-gray-400 ";
+        defaultClasses += " bg-gray-400 focus:ring-gray-500";
       } else if (danger) {
-        defaultClasses += " bg-red-500 ";
+        defaultClasses += " bg-red-500 focus:ring-red-600";
       } else {
         defaultClasses += " primary-background-color";
       }

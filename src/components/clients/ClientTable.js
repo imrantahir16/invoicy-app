@@ -82,7 +82,7 @@ const ClientTable = (advanceSearch = false) => {
   return (
     <>
       {advanceSearch && (
-        <div className="mb-2 rounded-xl bg-purple-100 p-3 shadow-sm">
+        <div className="mb-2 rounded-xl bg-white p-3 shadow-sm">
           <span className="mb-2 font-title">Advanced Search</span>
           <div className="flex w-full flex-col sm:flex-row">
             <div className="text-default-color mb-2 flex flex-1 flex-row px-2 font-title sm:mb-0 sm:text-left">
@@ -130,7 +130,7 @@ const ClientTable = (advanceSearch = false) => {
           </div>
         </div>
       )}
-      <div className="rounded-xl sm:bg-white sm:p-3">
+      <div className="rounded-xl shadow-sm sm:bg-white sm:p-3">
         <div className="invisible hidden w-full flex-col sm:visible sm:flex sm:flex-row">
           <div className="text-default-color text-title flex-1 sm:text-left">
             Namep

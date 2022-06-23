@@ -1,6 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faEllipsis,
+  faTrashCan,
+  faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 
 import {
@@ -59,7 +64,7 @@ const ClientList = ({ client, onEdit, onDelete }) => {
           <Menu
             menuButton={
               <MenuButton>
-                <div className="rounded-xl bg-gray-50 px-2">
+                <div className="rounded-xl bg-gray-50 px-2 focus:outline-none focus:ring focus:ring-blue-400">
                   <FontAwesomeIcon
                     className="h-6 w-6 text-blue-500"
                     icon={faEllipsis}
@@ -69,8 +74,17 @@ const ClientList = ({ client, onEdit, onDelete }) => {
             }
             transition
           >
-            <MenuItem onClick={() => onEdit(client)}>Edit</MenuItem>
-            <MenuItem onClick={() => onDelete(client)}>Delete</MenuItem>
+            <MenuItem onClick={() => onEdit(client)}>
+              <FontAwesomeIcon className="h-4 w-4 text-blue-400" icon={faPen} />
+              <span className="ml-2">Edit</span>
+            </MenuItem>
+            <MenuItem onClick={() => onDelete(client)}>
+              <FontAwesomeIcon
+                className="h-4 w-4 text-red-400"
+                icon={faTrashCan}
+              />
+              <span className="ml-2">Delete</span>
+            </MenuItem>
           </Menu>
         </div>
       </div>

@@ -1,11 +1,14 @@
 export const defaultStyle =
   "font-title text-md px-2 block w-full border-solid border-2 rounded-xl p-x2 focus:outline-none ";
-export const defaultInputStyle = defaultStyle + "border-indigo-400 h-12 flex-1";
+export const defaultInputStyle =
+  defaultStyle + "focus:ring focus:ring-blue-400 border-indigo-400 h-12 flex-1";
 export const defaultSearchStyle =
-  defaultStyle + "border-gray-100 h-12 flex-1 text-sm";
+  defaultStyle +
+  "border-gray-100 h-12 flex-1 text-sm focus:ring focus:ring-blue-400 caret-blue-300";
 export const defaultInputInvalidStyle =
   defaultStyle + "border-red-400 h-12 flex-1";
-export const defaultInputLargeStyle = defaultStyle + "border-indigo-400 h-14";
+export const defaultInputLargeStyle =
+  defaultStyle + "focus:ring focus:ring-blue-400 border-indigo-400 h-14";
 export const defaultInputLargeInvalidStyle =
   defaultStyle + "border-red-400 h-14";
 export const defaultSkeletonStyle =
