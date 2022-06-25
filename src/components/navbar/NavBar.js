@@ -84,7 +84,7 @@ const NavBar = () => {
       <ul className="mt-4">
         {NAV_DATA.map(({ title, link, icon }) => {
           return (
-            <li key={title} className="mb-2">
+            <li key={title} className="mb-2 ">
               <NavLink
                 to={link}
                 className={"side-link rounded-md"}
@@ -96,7 +96,7 @@ const NavBar = () => {
                     className={
                       isActive
                         ? `${navItemDefaultClasses} primary-self-text`
-                        : `${navItemDefaultClasses} text-default-color`
+                        : `${navItemDefaultClasses} text-default-color `
                     }
                     whileHover={{
                       color: "rgb(0, 102, 255)",

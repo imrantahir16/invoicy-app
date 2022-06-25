@@ -10,7 +10,7 @@ import { defaultSearchStyle } from "../../constants/defaultStyles";
 import Paginator from "../common/Paginator";
 import ClientList from "./ClientList";
 
-const itemsPerPage = 10;
+const itemsPerPage = 1;
 const CLIENT_ITEM = [
   {
     id: "123",

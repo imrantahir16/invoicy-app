@@ -22,7 +22,7 @@ const Header = () => {
       className={`z-12 fixed z-10 flex w-full items-center border-slate-50 bg-white pr-3 transition-all dark:bg-slate-700 ${classes} shadow-md`}
     >
       <motion.button
-        className="rounded-md p-4 focus:outline-none dark:text-sky-100"
+        className="ml-1 rounded-full p-2 focus:outline-none dark:text-sky-100 md:ml-2 md:focus:ring md:focus:ring-blue-400"
         initial={{
           translateX: 0,
         }}
@@ -42,7 +42,7 @@ const Header = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-6 w-6 "
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -81,7 +81,7 @@ const Header = () => {
       </div>
 
       <motion.button
-        className="mr-12 p-2"
+        className="mr-1 rounded-full p-2 focus:outline-none dark:text-sky-100 md:mr-12 md:focus:ring md:focus:ring-blue-400"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={toggleTheme}
@@ -91,7 +91,7 @@ const Header = () => {
         }}
       >
         <FontAwesomeIcon
-          className="h-8 w-8 text-blue-500 dark:text-sky-100"
+          className="h-6 w-6 text-blue-500 dark:text-sky-100"
           icon={darkMode ? faSun : faMoon}
           // color={"#0066FF"}
         />
