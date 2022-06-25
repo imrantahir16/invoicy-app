@@ -1,16 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import EmptyBar from "../common/EmptyBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faEnvelope,
-  faMobile,
-} from "@fortawesome/free-solid-svg-icons";
-import { defaultSearchStyle } from "../../constants/defaultStyles";
 import Paginator from "../common/Paginator";
 import ClientList from "./ClientList";
+import ClientListHeader from "./ClientListHeader";
+import ClientSearch from "./ClientSearch";
 
-const itemsPerPage = 1;
+const itemsPerPage = 10;
+// later need to add real client data instead of this dummy data
 const CLIENT_ITEM = [
   {
     id: "123",
@@ -42,20 +38,58 @@ const CLIENT_ITEM = [
     email: "test5@test.com",
     mobileNo: "03329992076",
   },
+  {
+    id: "dfsfd",
+    clientName: "imran25",
+    email: "tessst5@test.com",
+    mobileNo: "03329992676",
+  },
+  {
+    id: "123dsfasdas",
+    clientName: "imran65",
+    email: "tessst5@test.com",
+    mobileNo: "03329392076",
+  },
+  {
+    id: "123sdfasdas",
+    clientName: "fazal",
+    email: "sasa@test.com",
+    mobileNo: "03329292076",
+  },
+  {
+    id: "rrert",
+    clientName: "imranerwq5",
+    email: "teewrst5@test.com",
+    mobileNo: "03339992076",
+  },
+  {
+    id: "123asweerdas",
+    clientName: "imraner5",
+    email: "tereqwst5@test.com",
+    mobileNo: "03326992076",
+  },
+  {
+    id: "123asdadsdfs",
+    clientName: "imran655",
+    email: "test5@test.com",
+    mobileNo: "03329992076",
+  },
 ];
+
 const emptySearchForm = {
   clientName: "",
   email: "",
   mobileNo: "",
 };
-const ClientTable = (advanceSearch = false) => {
+const ClientTable = ({ advanceSearch = false }) => {
   const [searchForm, setSearchForm] = useState(emptySearchForm);
-
+  const [currentItems, setCurrentItems] = useState(null);
+  const allClients = [...CLIENT_ITEM];
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
   const pageChangehandler = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % CLIENT_ITEM.length;
+    const newOffset = (event.selected * itemsPerPage) % clients.length;
     setItemOffset(newOffset);
   };
   const searchValuehandler = useCallback((e, keyName) => {
@@ -64,7 +98,31 @@ const ClientTable = (advanceSearch = false) => {
     setSearchForm((prev) => {
       return { ...prev, [keyName]: value };
     });
+
+    setItemOffset(0);
   }, []);
+
+  const clients = useMemo(() => {
+    let filteredClient = allClients.length > 0 ? [...allClients].reverse() : [];
+    if (searchForm.clientName?.trim()) {
+      filteredClient = filteredClient.filter((client) =>
+        client.clientName.includes(searchForm.clientName)
+      );
+    }
+
+    if (searchForm.email?.trim()) {
+      filteredClient = filteredClient.filter((client) =>
+        client.email.includes(searchForm.email)
+      );
+    }
+    if (searchForm.mobileNo?.trim()) {
+      filteredClient = filteredClient.filter((client) =>
+        client.mobileNo.includes(searchForm.mobileNo)
+      );
+    }
+
+    return filteredClient;
+  }, [searchForm, allClients]);
 
   const onEditClientHandler = useCallback((item) => {
     //will edit client based on its it
@@ -77,90 +135,35 @@ const ClientTable = (advanceSearch = false) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setPageCount(Math.ceil(CLIENT_ITEM.length / itemsPerPage));
-  }, [itemOffset]);
+    setCurrentItems(clients.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(clients.length / itemsPerPage));
+  }, [itemOffset, clients]);
+
   return (
     <>
       {advanceSearch && (
-        <div className="mb-2 rounded-xl bg-white p-3 shadow-sm">
-          <span className="mb-2 font-title">Advanced Search</span>
-          <div className="flex w-full flex-col sm:flex-row">
-            <div className="text-default-color mb-2 flex flex-1 flex-row px-2 font-title sm:mb-0 sm:text-left">
-              <div className="mr-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100">
-                <FontAwesomeIcon
-                  className="h-6 w-6 text-gray-400"
-                  icon={faUser}
-                />
-              </div>
-              <input
-                className={defaultSearchStyle}
-                placeholder="Client name"
-                value={searchForm.clientName}
-                onChange={(e) => searchValuehandler(e, "clientName")}
-              />
-            </div>
-            <div className="text-default-color mb-2 flex flex-1 flex-row px-2 font-title sm:mb-0 sm:text-left">
-              <div className="mr-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100">
-                <FontAwesomeIcon
-                  className="h-6 w-6 text-gray-400"
-                  icon={faEnvelope}
-                />
-              </div>
-              <input
-                className={defaultSearchStyle}
-                placeholder="Client email"
-                value={searchForm.email}
-                onChange={(e) => searchValuehandler(e, "email")}
-              />
-            </div>
-            <div className="text-default-color mb-2 flex flex-1 flex-row px-2 font-title sm:mb-0 sm:text-left">
-              <div className="mr-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100">
-                <FontAwesomeIcon
-                  className="h-6 w-6 text-gray-400"
-                  icon={faMobile}
-                />
-              </div>
-              <input
-                className={defaultSearchStyle}
-                placeholder="Client mobile"
-                value={searchForm.mobileNo}
-                onChange={(e) => searchValuehandler(e, "mobileNo")}
-              />
-            </div>
-          </div>
-        </div>
+        <ClientSearch searchForm={searchForm} onSearch={searchValuehandler} />
       )}
+
       <div className="rounded-xl shadow-sm sm:bg-white sm:p-3">
-        <div className="invisible hidden w-full flex-col sm:visible sm:flex sm:flex-row">
-          <div className="text-default-color text-title flex-1 sm:text-left">
-            Namep
-          </div>
-          <div className="text-default-color text-title flex-1 sm:text-left">
-            Mobile
-          </div>
-          <div className="text-default-color text-title flex-1 sm:text-left">
-            Email
-          </div>
-          <div className="text-default-color text-title sm:w-11 sm:text-left">
-            Action
-          </div>
-        </div>
-        <div>
-          {CLIENT_ITEM.map((client) => {
-            return (
-              <ClientList
-                key={client.id}
-                client={client}
-                onEdit={onEditClientHandler}
-                onDelete={onDeleteClientHandler}
-              />
-            );
-          })}
-          {CLIENT_ITEM.length <= 0 && <EmptyBar title="Client Data" />}
-          {CLIENT_ITEM.length > itemsPerPage && (
-            <Paginator onPageChange={pageChangehandler} pageCount={pageCount} />
-          )}
-        </div>
+        <ClientListHeader />
+        <ul className="mt-2">
+          {currentItems &&
+            currentItems.map((client) => {
+              return (
+                <ClientList
+                  key={client.id}
+                  client={client}
+                  onEdit={onEditClientHandler}
+                  onDelete={onDeleteClientHandler}
+                />
+              );
+            })}
+        </ul>
+        {clients.length <= 0 && <EmptyBar title="Client Data" />}
+        {clients.length > itemsPerPage && (
+          <Paginator onPageChange={pageChangehandler} pageCount={pageCount} />
+        )}
       </div>
     </>
   );

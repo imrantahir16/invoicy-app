@@ -4,7 +4,7 @@ export const defaultInputStyle =
   defaultStyle + "focus:ring focus:ring-blue-400 border-indigo-400 h-12 flex-1";
 export const defaultSearchStyle =
   defaultStyle +
-  "border-gray-100 h-12 flex-1 text-sm focus:ring focus:ring-blue-400 caret-blue-300";
+  "border-gray-100 h-10 flex-1 text-sm focus:ring focus:ring-blue-400 caret-blue-300";
 export const defaultInputInvalidStyle =
   defaultStyle + "border-red-400 h-12 flex-1";
 export const defaultInputLargeStyle =

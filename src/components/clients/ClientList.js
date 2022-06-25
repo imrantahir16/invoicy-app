@@ -19,18 +19,18 @@ import {
 const ClientList = ({ client, onEdit, onDelete }) => {
   const { image, clientName, email, mobileNo } = client;
   return (
-    <div className={defaultTdWrapperStyle}>
+    <li className={defaultTdWrapperStyle}>
       <div className={defaultTdStyle}>
         <div className={defaultTdContentTitleStyle}>Name</div>
         <div className={defaultTdContent}>
           {image ? (
             <img
-              className="h-10 w-10 rounded-2xl object-cover"
+              className="mr-2 h-10 w-10 rounded-2xl object-cover"
               src={image}
               alt={clientName}
             />
           ) : (
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gray-100">
+            <span className="mr-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-gray-100">
               <FontAwesomeIcon
                 className="h-6 w-6 text-gray-400"
                 icon={faUser}
@@ -88,7 +88,7 @@ const ClientList = ({ client, onEdit, onDelete }) => {
           </Menu>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

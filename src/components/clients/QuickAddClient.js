@@ -23,7 +23,7 @@ const emptyForm = {
   image: "",
   clientName: "",
   email: "",
-  mobile: "",
+  mobileNo: "",
   address: "",
 };
 
@@ -163,7 +163,7 @@ const QuickAddClient = () => {
               }
               disabled={isInitLoading}
               value={clientForm.mobile}
-              onChange={(e) => clientInputFieldHandler(e, "mobile")}
+              onChange={(e) => clientInputFieldHandler(e, "mobileNo")}
             />
           )}
         </div>
