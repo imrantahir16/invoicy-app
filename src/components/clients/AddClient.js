@@ -27,7 +27,7 @@ const emptyForm = {
   address: "",
 };
 
-const QuickAddClient = () => {
+const AddClient = () => {
   const [clientForm, setClientForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
   const { initLoading: isInitLoading } = useAppContext();
@@ -196,4 +196,4 @@ const QuickAddClient = () => {
   );
 };
 
-export default QuickAddClient;
+export default AddClient;

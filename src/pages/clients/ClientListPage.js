@@ -1,6 +1,6 @@
 import React from "react";
 import ClientTable from "../../components/clients/ClientTable";
-import QuickAddClient from "../../components/clients/QuickAddClient";
+import AddClient from "../../components/clients/AddClient";
 import PageTitle from "../../components/common/PageTitle";
 
 const ClientListPage = () => {
@@ -14,7 +14,7 @@ const ClientListPage = () => {
           <ClientTable advanceSearch />
         </div>
         <div className="w-full pl-4 pr-4 sm:pl-4 sm:pr-2 lg:w-2/6">
-          <QuickAddClient />
+          <AddClient />
         </div>
       </div>
     </div>

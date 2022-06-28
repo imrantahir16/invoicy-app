@@ -137,7 +137,7 @@ const ClientTable = ({ advanceSearch = false }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(clients.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(clients.length / itemsPerPage));
-  }, [itemOffset, clients]);
+  }, [itemOffset]);
 
   return (
     <>
