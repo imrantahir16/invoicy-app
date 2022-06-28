@@ -86,7 +86,7 @@ const QuickAddClient = () => {
     const isValidEmail =
       clientForm?.email?.trim() && clientForm.email.match(emailRegex);
     const isValidPhone =
-      clientForm?.mobile?.trim() && clientForm.mobile.match(phoneRegex);
+      clientForm?.mobileNo?.trim() && clientForm.mobileNo.match(phoneRegex);
 
     setValidForm((prev) => ({
       id: true,
@@ -157,12 +157,12 @@ const QuickAddClient = () => {
             <input
               placeholder="Mobile No."
               className={
-                !validForm.mobile && isInputTouched
+                !validForm.mobileNo && isInputTouched
                   ? defaultInputInvalidStyle
                   : defaultInputStyle
               }
               disabled={isInitLoading}
-              value={clientForm.mobile}
+              value={clientForm.mobileNo}
               onChange={(e) => clientInputFieldHandler(e, "mobileNo")}
             />
           )}
