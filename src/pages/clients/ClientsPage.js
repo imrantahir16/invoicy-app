@@ -3,7 +3,7 @@ import ClientTable from "../../components/clients/ClientTable";
 import AddClient from "../../components/clients/AddClient";
 import PageTitle from "../../components/common/PageTitle";
 
-const ClientListPage = () => {
+const ClientsPage = () => {
   return (
     <div>
       <div className="p-4">
@@ -21,4 +21,4 @@ const ClientListPage = () => {
   );
 };
 
-export default ClientListPage;
+export default ClientsPage;

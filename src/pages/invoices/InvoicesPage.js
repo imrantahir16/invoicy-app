@@ -1,7 +1,7 @@
 import React from "react";
 import PageTitle from "../../components/common/PageTitle";
 
-const InvoicesListPage = () => {
+const InvoicesPage = () => {
   return (
     <>
       <div className="p-4">
@@ -11,4 +11,4 @@ const InvoicesListPage = () => {
   );
 };
 
-export default InvoicesListPage;
+export default InvoicesPage;

@@ -38,7 +38,7 @@ const AddClient = () => {
     }, {})
   );
 
-  const OnchangeImageHandler = useCallback((str) => {
+  const imageChangeHandler = useCallback((str) => {
     // setting client form
     setClientForm((prev) => ({ ...prev, image: str }));
     // dispatching client form field of image
@@ -100,7 +100,7 @@ const AddClient = () => {
 
   return (
     <form onSubmit={submitClientHandler} className="rounded-xl bg-white p-4">
-      <SectionTitle>Add Quick Client</SectionTitle>
+      <SectionTitle>Add Client</SectionTitle>
       <div className="mt-2 flex">
         {isInitLoading ? (
           <Skeleton className="skeleton-input-radius skeleton-image border-2 border-dashed" />
@@ -109,7 +109,7 @@ const AddClient = () => {
             keyName="imageUpload"
             url={clientForm.image}
             className={imageUploadClasses}
-            onImageChange={OnchangeImageHandler}
+            onImageChange={imageChangeHandler}
           />
         )}
         <div className="flex-1 pl-3">

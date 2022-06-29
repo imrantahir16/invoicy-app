@@ -14,7 +14,6 @@ const ImageUpload = (props) => {
   const onImageChangehandler = useCallback(
     (e) => {
       const file = e.target.files[0];
-      console.log(file.type);
       let allowedExtensions = /(jpg|jpeg|png)$/i;
 
       const isValid = allowedExtensions.exec(file.type);
@@ -29,7 +28,6 @@ const ImageUpload = (props) => {
       reader.readAsDataURL(file);
       reader.onload = function () {
         if (onImageChange) {
-          console.log(reader.result);
           onImageChange(reader.result);
         }
         e.target.value = null;

@@ -7,7 +7,6 @@ import {
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-
 import {
   defaultTdWrapperStyle,
   defaultTdStyle,
@@ -17,7 +16,7 @@ import {
 } from "../../constants/defaultStyles";
 
 const ProductList = ({ product, onEdit, onDelete }) => {
-  const { productID, image, productName, amount, quantity } = product;
+  const { productID, image, productName, price, quantity } = product;
   return (
     <li className={defaultTdWrapperStyle}>
       <div className={defaultTdStyle}>
@@ -51,10 +50,10 @@ const ProductList = ({ product, onEdit, onDelete }) => {
         </div>
       </div>
       <div className={defaultTdStyle}>
-        <div className={defaultTdContentTitleStyle}>Amount</div>
+        <div className={defaultTdContentTitleStyle}>Price</div>
         <div className={defaultTdContent}>
           <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-            {amount}
+            {price}
           </span>
         </div>
       </div>

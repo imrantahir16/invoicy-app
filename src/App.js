@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import AppContainer from "./components/container/AppContainer";
 import HomePage from "./pages/HomePage";
-import ClientsListPage from "./pages/clients/ClientListPage";
-import ProductListPage from "./pages/products/ProductListPage";
-import InvoicesListPage from "./pages/invoices/InvoicesListPage";
+import ClientsPage from "./pages/clients/ClientsPage";
+import ProductsPage from "./pages/products/ProductsPage";
+import InvoicesPage from "./pages/invoices/InvoicesPage";
 import InvoiceDetailPage from "./pages/invoices/InvoiceDetailPage";
 import AboutPage from "./pages/about/AboutPage";
 import useAppInit from "./hooks/useAppInit";
@@ -21,10 +21,10 @@ function App() {
       <AppContainer>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="clients" element={<ClientsListPage />} />
-          <Route path="products" element={<ProductListPage />} />
+          <Route path="clients" element={<ClientsPage />} />
+          <Route path="products" element={<ProductsPage />} />
           <Route path="invoices">
-            <Route path="" element={<InvoicesListPage />} />
+            <Route path="" element={<InvoicesPage />} />
             <Route path=":id" element={<InvoiceDetailPage />} />
           </Route>
           <Route path="/about" element={<AboutPage />} />

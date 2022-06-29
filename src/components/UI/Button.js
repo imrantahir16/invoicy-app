@@ -56,14 +56,14 @@ const Button = (props) => {
     <motion.button
       type={type}
       whileHover={{
-        scale: size === "small" ? 1.02 : 1.04,
+        scale: size === "small" ? 1.02 : 1.03,
         transition: {
           type: "spring",
           damping: 15,
           duration: 0.1,
         },
       }}
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.95 }}
       className={buttonClasses}
       {...props}
     >

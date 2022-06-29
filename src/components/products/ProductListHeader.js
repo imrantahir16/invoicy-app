@@ -10,7 +10,7 @@ const ProductListHeader = () => {
         Product Name
       </div>
       <div className="text-default-color text-title flex-1 sm:text-left">
-        Amount
+        Price
       </div>
       <div className="text-default-color text-title flex-1 sm:text-left">
         Quantity
