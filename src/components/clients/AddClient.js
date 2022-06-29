@@ -13,10 +13,7 @@ import {
 } from "../../constants/defaultStyles";
 import Skeleton from "react-loading-skeleton";
 import { nanoid } from "nanoid";
-
-const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
-const phoneRegex =
-  /^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{2})((-?)|( ?))([0-9]{7})$/gm;
+import { emailRegex, phoneRegex, isNotEmpty } from "../../utilities/utilities";
 
 const emptyForm = {
   id: "",
@@ -84,17 +81,17 @@ const AddClient = () => {
 
   useEffect(() => {
     const isValidEmail =
-      clientForm?.email?.trim() && clientForm.email.match(emailRegex);
+      isNotEmpty(clientForm?.email) && clientForm.email.match(emailRegex);
     const isValidPhone =
-      clientForm?.mobileNo?.trim() && clientForm.mobileNo.match(phoneRegex);
+      isNotEmpty(clientForm?.mobileNo) && clientForm.mobileNo.match(phoneRegex);
 
     setValidForm((prev) => ({
       id: true,
       image: true,
-      clientName: clientForm?.clientName?.trim() ? true : false,
-      email: isValidEmail ? true : false,
-      address: clientForm?.address?.trim() ? true : false,
-      mobile: isValidPhone ? true : false,
+      clientName: isNotEmpty(clientForm?.clientName),
+      email: isValidEmail,
+      address: isNotEmpty(clientForm?.address),
+      mobile: isValidPhone,
     }));
   }, [clientForm]);
 

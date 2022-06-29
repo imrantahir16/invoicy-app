@@ -13,6 +13,7 @@ import {
 import Skeleton from "react-loading-skeleton";
 import Button from "../UI/Button";
 import { nanoid } from "nanoid";
+import { isNotEmpty } from "../../utilities/utilities";
 
 const emptyForm = {
   id: "",
@@ -23,7 +24,6 @@ const emptyForm = {
   quantity: "",
 };
 
-const isNotEmpty = (value) => value?.trim() !== "";
 const AddProduct = () => {
   const [productForm, setProductForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
@@ -84,8 +84,8 @@ const AddProduct = () => {
     setValidForm((prev) => ({
       id: true,
       image: true,
-      productID: productForm?.productID?.trim() ? true : false,
-      productName: productForm?.productName?.trim() ? true : false,
+      productID: isNotEmpty(productForm?.productID),
+      productName: isNotEmpty(productForm?.productName),
       price: isNotEmpty(productForm?.price),
       quantity: isNotEmpty(productForm?.quantity),
     }));
