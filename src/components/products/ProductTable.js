@@ -4,46 +4,47 @@ import ProductListHeader from "./ProductListHeader";
 import ProductSearch from "./ProductSearch";
 import Paginator from "../common/Paginator";
 import EmptyBar from "../common/EmptyBar";
+import { useSelector } from "react-redux";
 
 const itemsPerPage = 2;
 
-const PRODUCT_LIST = [
-  {
-    id: "123",
-    productID: "123",
-    productName: "lays",
-    price: 20,
-    quantity: 200,
-  },
-  {
-    id: "231",
-    productID: "231",
-    productName: "Badam",
-    price: 2000,
-    quantity: 20,
-  },
-  {
-    id: "1236",
-    productID: "1236",
-    productName: "Sun Glass",
-    price: 350,
-    quantity: 2,
-  },
-  {
-    id: "1234",
-    productID: "1234",
-    productName: "Red n White",
-    price: 100,
-    quantity: 20,
-  },
-  {
-    id: "12345",
-    productID: "12345",
-    productName: "Nestle juice",
-    price: 200,
-    quantity: 20,
-  },
-];
+// const PRODUCT_LIST = [
+//   {
+//     id: "123",
+//     productID: "123",
+//     productName: "lays",
+//     price: 20,
+//     quantity: 200,
+//   },
+//   {
+//     id: "231",
+//     productID: "231",
+//     productName: "Badam",
+//     price: 2000,
+//     quantity: 20,
+//   },
+//   {
+//     id: "1236",
+//     productID: "1236",
+//     productName: "Sun Glass",
+//     price: 350,
+//     quantity: 2,
+//   },
+//   {
+//     id: "1234",
+//     productID: "1234",
+//     productName: "Red n White",
+//     price: 100,
+//     quantity: 20,
+//   },
+//   {
+//     id: "12345",
+//     productID: "12345",
+//     productName: "Nestle juice",
+//     price: 200,
+//     quantity: 20,
+//   },
+// ];
 
 const emptySearchForm = {
   productID: "",
@@ -51,7 +52,7 @@ const emptySearchForm = {
 };
 const ProductTable = ({ advanceSearch = false }) => {
   const [searchForm, setSearchForm] = useState(emptySearchForm);
-  const allProducts = [...PRODUCT_LIST];
+  const allProducts = useSelector((state) => state.products.data);
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -102,7 +103,7 @@ const ProductTable = ({ advanceSearch = false }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(products.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(products.length / itemsPerPage));
-  }, [itemOffset]);
+  }, [itemOffset, products]);
 
   return (
     <>

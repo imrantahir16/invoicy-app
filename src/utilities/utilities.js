@@ -3,3 +3,5 @@ export const phoneRegex =
   /^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{2})((-?)|( ?))([0-9]{7})$/gm;
 
 export const isNotEmpty = (value) => value?.trim() !== "";
+
+export const isNotZero = (value) => (value > 0 ? true : false);

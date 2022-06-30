@@ -13,18 +13,22 @@ import {
 import Skeleton from "react-loading-skeleton";
 import Button from "../UI/Button";
 import { nanoid } from "nanoid";
-import { isNotEmpty } from "../../utilities/utilities";
+import { isNotEmpty, isNotZero } from "../../utilities/utilities";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "../../store/productsSlice";
 
 const emptyForm = {
   id: "",
   image: "",
   productID: "",
   productName: "",
-  price: "",
-  quantity: "",
+  price: 0,
+  quantity: 0,
 };
 
 const AddProduct = () => {
+  const dispatch = useDispatch();
+  const productNewForm = useSelector((state) => state.products.newForm);
   const [productForm, setProductForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
   const { initLoading: isInitLoading } = useAppContext();
@@ -73,7 +77,8 @@ const AddProduct = () => {
 
         return;
       }
-      console.log({ ...productForm, id: nanoid() });
+      // console.log({ ...productForm, id: nanoid() });
+      dispatch(addProduct({ ...productForm, id: nanoid() }));
       console.log("submitted");
       setIsInputTouched(false);
     },
@@ -86,10 +91,17 @@ const AddProduct = () => {
       image: true,
       productID: isNotEmpty(productForm?.productID),
       productName: isNotEmpty(productForm?.productName),
-      price: isNotEmpty(productForm?.price),
-      quantity: isNotEmpty(productForm?.quantity),
+      price: isNotZero(productForm?.price),
+      quantity: isNotZero(productForm?.quantity),
     }));
   }, [productForm]);
+
+  // useEffect(() => {
+  //   if (productNewForm) {
+  //     setProductForm(productNewForm);
+  //   }
+  // }, [productNewForm]);
+
   return (
     <form onSubmit={submitProductHandler} className="rounded-xl bg-white p-4">
       <SectionTitle>Add Product</SectionTitle>
