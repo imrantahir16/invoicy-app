@@ -4,53 +4,17 @@ import ProductListHeader from "./ProductListHeader";
 import ProductSearch from "./ProductSearch";
 import Paginator from "../common/Paginator";
 import EmptyBar from "../common/EmptyBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEditedId, setDeletedId } from "../../store/productsSlice";
 
-const itemsPerPage = 2;
-
-// const PRODUCT_LIST = [
-//   {
-//     id: "123",
-//     productID: "123",
-//     productName: "lays",
-//     price: 20,
-//     quantity: 200,
-//   },
-//   {
-//     id: "231",
-//     productID: "231",
-//     productName: "Badam",
-//     price: 2000,
-//     quantity: 20,
-//   },
-//   {
-//     id: "1236",
-//     productID: "1236",
-//     productName: "Sun Glass",
-//     price: 350,
-//     quantity: 2,
-//   },
-//   {
-//     id: "1234",
-//     productID: "1234",
-//     productName: "Red n White",
-//     price: 100,
-//     quantity: 20,
-//   },
-//   {
-//     id: "12345",
-//     productID: "12345",
-//     productName: "Nestle juice",
-//     price: 200,
-//     quantity: 20,
-//   },
-// ];
+const itemsPerPage = 10;
 
 const emptySearchForm = {
   productID: "",
   productName: "",
 };
 const ProductTable = ({ advanceSearch = false }) => {
+  const dispatch = useDispatch();
   const [searchForm, setSearchForm] = useState(emptySearchForm);
   const allProducts = useSelector((state) => state.products.data);
   const [currentItems, setCurrentItems] = useState(null);
@@ -90,14 +54,19 @@ const ProductTable = ({ advanceSearch = false }) => {
     return filteredProducts;
   }, [searchForm, allProducts]);
 
-  const onEditClientHandler = useCallback((item) => {
-    //will edit client based on its it
-    console.log("Edited client " + item.id);
-  });
-  const onDeleteClientHandler = useCallback((item) => {
-    //will delete client based on its it
-    console.log("Deleted client" + item.id);
-  });
+  const onEditProductHandler = useCallback(
+    (item) => {
+      dispatch(setEditedId(item.id));
+      console.log("editing-started");
+    },
+    [dispatch]
+  );
+  const onDeleteProductHandler = useCallback(
+    (item) => {
+      dispatch(setDeletedId(item.id));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -119,8 +88,8 @@ const ProductTable = ({ advanceSearch = false }) => {
                 <ProductList
                   key={product.id}
                   product={product}
-                  onEdit={onEditClientHandler}
-                  onDelete={onDeleteClientHandler}
+                  onEdit={onEditProductHandler}
+                  onDelete={onDeleteProductHandler}
                 />
               );
             })}

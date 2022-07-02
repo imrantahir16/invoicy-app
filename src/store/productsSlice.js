@@ -10,6 +10,8 @@ const initialState = {
     price: 0,
     quantity: 0,
   },
+  editedId: null,
+  deletedId: null,
 };
 export const productsSlice = createSlice({
   name: "products",
@@ -20,23 +22,32 @@ export const productsSlice = createSlice({
       console.log(newData);
       state.data = newData;
       localforage.setItem("products", newData);
-
-      const resetForm = {
-        id: "",
-        productID: "",
-        productName: "",
-        price: 0,
-        quantity: 0,
-      };
-      state.newForm = { resetForm };
     },
 
     resetProductForm: (state, action) => {
       state.newForm = { ...action.payload };
     },
+
+    setAllProducts: (state, action) => {
+      state.data = action.payload;
+    },
+
+    setEditedId: (state, action) => {
+      state.editedId = action.payload;
+    },
+
+    setDeletedId: (state, action) => {
+      state.deletedId = action.payload;
+    },
   },
 });
 
-export const { addProduct } = productsSlice.actions;
+export const {
+  addProduct,
+  resetProductForm,
+  setAllProducts,
+  setEditedId,
+  setDeletedId,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

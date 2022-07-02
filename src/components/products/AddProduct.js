@@ -15,7 +15,7 @@ import Button from "../UI/Button";
 import { nanoid } from "nanoid";
 import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from "../../store/productsSlice";
+import { addProduct, resetProductForm } from "../../store/productsSlice";
 
 const emptyForm = {
   id: "",
@@ -79,10 +79,11 @@ const AddProduct = () => {
       }
       // console.log({ ...productForm, id: nanoid() });
       dispatch(addProduct({ ...productForm, id: nanoid() }));
+      dispatch(resetProductForm(emptyForm));
       console.log("submitted");
       setIsInputTouched(false);
     },
-    [validForm, productForm]
+    [validForm, productForm, dispatch]
   );
 
   useEffect(() => {
@@ -96,11 +97,9 @@ const AddProduct = () => {
     }));
   }, [productForm]);
 
-  // useEffect(() => {
-  //   if (productNewForm) {
-  //     setProductForm(productNewForm);
-  //   }
-  // }, [productNewForm]);
+  useEffect(() => {
+    productNewForm && setProductForm(productNewForm);
+  }, [productNewForm]);
 
   return (
     <form onSubmit={submitProductHandler} className="rounded-xl bg-white p-4">
