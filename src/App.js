@@ -8,7 +8,6 @@ import InvoiceDetailPage from "./pages/invoices/InvoiceDetailPage";
 import AboutPage from "./pages/about/AboutPage";
 import useAppInit from "./hooks/useAppInit";
 import { useEffect } from "react";
-import EditProduct from "./components/products/EditProduct";
 
 function App() {
   const { initialSetData } = useAppInit();
@@ -32,7 +31,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppContainer>
-      <EditProduct />
     </BrowserRouter>
   );
 }

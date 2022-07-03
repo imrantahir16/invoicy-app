@@ -16,10 +16,12 @@ const Button = (props) => {
 
   const buttonClasses = useMemo(() => {
     let defaultClasses =
-      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center focus:outline-none focus:ring";
+      "cursor-pointer rounded-xl font-title text-white flex flex-row items-center justify-center focus:outline-none focus:ring shadow-sm";
 
     if (block) {
       defaultClasses += " block w-full focus:ring-blue-400";
+    } else {
+      defaultClasses += " inline-flex w-full my-1 sm:ml-3 sm:w-auto sm:text-sm";
     }
 
     if (size === "small") {

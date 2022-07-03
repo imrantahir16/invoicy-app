@@ -1,33 +1,32 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEditedId, getEditedId } from "../../store/productsSlice";
+import { setDeletedId, getDeletedId } from "../../store/productsSlice";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
 
-const EditProduct = ({ onClose }) => {
+const DeleteProduct = ({ onClose }) => {
   const dispatch = useDispatch();
-  const editedId = useSelector(getEditedId);
+  const deletedId = useSelector(getDeletedId);
 
   const onCloseHandler = useCallback(() => {
-    dispatch(setEditedId(null));
+    dispatch(setDeletedId(null));
     onClose();
   }, [dispatch, onClose]);
 
   useEffect(() => {
-    if (editedId !== null) {
-      console.log("editing product");
+    if (deletedId !== null) {
+      console.log("deleting product");
     }
-  }, [editedId]);
-
+  }, [deletedId]);
   return (
     <Modal onClose={onCloseHandler}>
-      <ModalContent>
-        <div>{editedId}</div>
-      </ModalContent>
+      <ModalContent>{deletedId}</ModalContent>
       <ModalActions>
-        <Button onClick={() => {}}>Confirm</Button>
+        <Button danger={1} onClick={() => {}}>
+          Delete
+        </Button>
         <Button outlined={1} secondary={1} onClick={onCloseHandler}>
           Cancel
         </Button>
@@ -36,4 +35,4 @@ const EditProduct = ({ onClose }) => {
   );
 };
 
-export default EditProduct;
+export default DeleteProduct;

@@ -50,4 +50,9 @@ export const {
   setDeletedId,
 } = productsSlice.actions;
 
+export const getAllProducts = (state) => state.products.data;
+export const getNewForm = (state) => state.products.newForm;
+export const getEditedId = (state) => state.products.editedId;
+export const getDeletedId = (state) => state.products.deletedId;
+
 export default productsSlice.reducer;
