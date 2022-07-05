@@ -1,5 +1,3 @@
-// import localforage from "localforage";
-import localforage from "localforage";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useAppContext } from "../context/AppContext";
@@ -11,8 +9,7 @@ const useAppInit = () => {
 
   const initialSetData = useCallback(async () => {
     try {
-      // const [appContext] = await localforage.getItem("appContext");
-      const products = await localforage.getItem("products");
+      const products = await JSON.parse(localStorage.getItem("products"));
 
       products && dispatch(setAllProducts(products));
     } catch (error) {

@@ -6,12 +6,10 @@ import {
   useState,
 } from "react";
 import AppData from "../shared/AppData.json";
-import localforage from "localforage";
 
 const initData = {
   ...AppData,
   toggleNavBar: () => {},
-  toggleTheme: () => {},
   setEscapeOverflow: (boolean) => {},
   setInitLoading: (boolean) => {},
   setScreenLoading: (boolean) => {},
@@ -27,20 +25,11 @@ export const AppContextProvider = ({ children }) => {
         ...prev,
         showNavBar: !prev?.showNavBar,
       };
-      const { showNavBar, darkTheme, initLoading } = updateData;
-      localforage.setItem("appContext", { initLoading, showNavBar, darkTheme });
-      return updateData;
-    });
-  }, []);
-
-  const toggleTheme = useCallback(() => {
-    setState((prev) => {
-      const updateData = {
-        ...prev,
-        darkTheme: !prev?.darkTheme,
-      };
-      const { darkTheme, showNavBar } = updateData;
-      localforage.setItem("appContext", { darkTheme, showNavBar });
+      const { showNavBar, initLoading } = updateData;
+      localStorage.setItem(
+        "appContext",
+        JSON.stringify({ initLoading, showNavBar })
+      );
       return updateData;
     });
   }, []);
@@ -65,7 +54,7 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const appContext = await localforage.getItem("appContext");
+      const appContext = await JSON.parse(localStorage.getItem("appContext"));
       if (appContext) {
         setState((prev) => ({ ...prev, showNavBar: appContext.showNavBar }));
       }
@@ -77,7 +66,6 @@ export const AppContextProvider = ({ children }) => {
       value={{
         ...state,
         toggleNavBar,
-        toggleTheme,
         setInitLoading,
         setEscapeOverflow,
         setScreenLoading,

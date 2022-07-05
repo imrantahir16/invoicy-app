@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import localforage from "localforage";
 
 const initialState = {
   data: [],
   newForm: {
     id: "",
+    image: "",
     productID: "",
     productName: "",
     price: 0,
@@ -21,7 +21,7 @@ export const productsSlice = createSlice({
       const newData = [...state.data, action.payload];
       console.log(newData);
       state.data = newData;
-      localforage.setItem("products", newData);
+      localStorage.setItem("products", JSON.stringify(newData));
     },
 
     resetProductForm: (state, action) => {
@@ -39,6 +39,26 @@ export const productsSlice = createSlice({
     setDeletedId: (state, action) => {
       state.deletedId = action.payload;
     },
+
+    onConfirmEditProduct: (state, action) => {
+      const isFindIndex = state.data.findIndex(
+        (product) => product.id === state.editedId
+      );
+      if (isFindIndex !== -1) {
+        state.data[isFindIndex] = { ...action.payload };
+      }
+      state.editedId = null;
+      localStorage.setItem("products", JSON.stringify([...state.data]));
+    },
+
+    onConfirmDeleteProduct: (state, action) => {
+      const newData = state.data.filter(
+        (product) => product.id !== state.deletedId
+      );
+      state.data = newData;
+      state.deletedId = null;
+      localStorage.setItem("products", JSON.stringify(newData));
+    },
   },
 });
 
@@ -48,6 +68,8 @@ export const {
   setAllProducts,
   setEditedId,
   setDeletedId,
+  onConfirmEditProduct,
+  onConfirmDeleteProduct,
 } = productsSlice.actions;
 
 export const getAllProducts = (state) => state.products.data;

@@ -5,6 +5,7 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
+import { onConfirmDeleteProduct } from "../../store/productsSlice";
 
 const DeleteProduct = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,12 @@ const DeleteProduct = ({ onClose }) => {
     <Modal onClose={onCloseHandler}>
       <ModalContent>{deletedId}</ModalContent>
       <ModalActions>
-        <Button danger={1} onClick={() => {}}>
+        <Button
+          danger={"true"}
+          onClick={() => {
+            dispatch(onConfirmDeleteProduct());
+          }}
+        >
           Delete
         </Button>
         <Button outlined={1} secondary={1} onClick={onCloseHandler}>
