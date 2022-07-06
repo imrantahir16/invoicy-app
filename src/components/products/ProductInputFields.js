@@ -11,7 +11,7 @@ import {
 } from "../../constants/defaultStyles";
 import Skeleton from "react-loading-skeleton";
 
-const ProductField = ({
+const ProductInputFields = ({
   productForm,
   onImageChange,
   validForm,
@@ -127,4 +127,4 @@ const ProductField = ({
   );
 };
 
-export default ProductField;
+export default ProductInputFields;

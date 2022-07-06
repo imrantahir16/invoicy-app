@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct, resetProductForm } from "../../store/productsSlice";
-import ProductField from "./ProductField";
+import ProductInputFields from "./ProductInputFields";
 
 const emptyForm = {
   id: "",
@@ -83,7 +83,7 @@ const AddProduct = () => {
   return (
     <form onSubmit={submitProductHandler} className="rounded-xl bg-white p-4">
       <SectionTitle>Add Product</SectionTitle>
-      <ProductField
+      <ProductInputFields
         productForm={productForm}
         validForm={validForm}
         onImageChange={imageChangeHandler}

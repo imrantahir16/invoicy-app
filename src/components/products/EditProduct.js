@@ -10,7 +10,7 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
-import ProductField from "./ProductField";
+import ProductInputFields from "./ProductInputFields";
 import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 import SectionTitle from "../common/SectionTitle";
 
@@ -102,7 +102,7 @@ const EditProduct = ({ onClose }) => {
         <ModalContent>
           <div className="mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left">
             <SectionTitle>Edit product</SectionTitle>
-            <ProductField
+            <ProductInputFields
               productForm={productForm}
               validForm={validForm}
               onImageChange={imageChangeHandler}
