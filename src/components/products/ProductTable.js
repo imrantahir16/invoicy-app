@@ -21,8 +21,8 @@ const emptySearchForm = {
 };
 const ProductTable = ({ advanceSearch = false }) => {
   const dispatch = useDispatch();
-  const [searchForm, setSearchForm] = useState(emptySearchForm);
   const allProducts = useSelector(getAllProducts);
+  const [searchForm, setSearchForm] = useState(emptySearchForm);
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);

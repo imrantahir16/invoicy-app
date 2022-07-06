@@ -9,7 +9,7 @@ const AppContainer = (props) => {
   const { showNavBar, escapeOverflow } = useAppContext();
   return (
     <div
-      className={`relative min-h-screen lg:flex-grow ${
+      className={`relative min-h-screen dark:bg-slate-800 dark:text-sky-100 lg:flex-grow ${
         escapeOverflow ? "" : "app-wrapper"
       }`}
     >

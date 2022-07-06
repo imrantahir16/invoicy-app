@@ -19,7 +19,6 @@ export const productsSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       const newData = [...state.data, action.payload];
-      console.log(newData);
       state.data = newData;
       localStorage.setItem("products", JSON.stringify(newData));
     },

@@ -1,19 +1,15 @@
-import React, { useCallback, useMemo, useState, useEffect } from "react";
-import ImageUpload from "../common/ImageUpload";
+import React, { useCallback, useState, useEffect } from "react";
 import SectionTitle from "../common/SectionTitle";
 import Button from "../UI/Button";
-import { useAppContext } from "../../context/AppContext";
-import {
-  defaultSkeletonLargeStyle,
-  defaultSkeletonNormalStyle,
-  defaultInputLargeStyle,
-  defaultInputLargeInvalidStyle,
-  defaultInputInvalidStyle,
-  defaultInputStyle,
-} from "../../constants/defaultStyles";
-import Skeleton from "react-loading-skeleton";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { emailRegex, phoneRegex, isNotEmpty } from "../../utilities/utilities";
+import {
+  addNewClient,
+  resetClientForm,
+  getNewForm,
+} from "../../store/clientsSlice";
+import ClientInputFields from "./ClientInputFields";
 
 const emptyForm = {
   id: "",
@@ -25,9 +21,10 @@ const emptyForm = {
 };
 
 const AddClient = () => {
+  const dispatch = useDispatch();
+  const clientNewForm = useSelector(getNewForm);
   const [clientForm, setClientForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
-  const { initLoading: isInitLoading } = useAppContext();
 
   const [validForm, setValidForm] = useState(
     Object.keys(emptyForm).reduce((a, b) => {
@@ -36,21 +33,8 @@ const AddClient = () => {
   );
 
   const imageChangeHandler = useCallback((str) => {
-    // setting client form
     setClientForm((prev) => ({ ...prev, image: str }));
-    // dispatching client form field of image
-    console.log(str);
   }, []);
-
-  const imageUploadClasses = useMemo(() => {
-    const defaultClasses = "rounded-xl";
-
-    if (!clientForm.image) {
-      return `${defaultClasses} border-dashed border-2 border-indigo-400`;
-    }
-
-    return defaultClasses;
-  }, [clientForm]);
 
   const clientInputFieldHandler = (event, keyName) => {
     const value = event.target.value;
@@ -58,8 +42,6 @@ const AddClient = () => {
     setClientForm((prev) => {
       return { ...prev, [keyName]: value };
     });
-
-    //dispatch client data
   };
 
   const submitClientHandler = useCallback(
@@ -72,7 +54,8 @@ const AddClient = () => {
         console.log("not Valid");
         return;
       }
-      console.log({ ...clientForm, id: nanoid() });
+      dispatch(addNewClient({ ...clientForm, id: nanoid() }));
+      dispatch(resetClientForm(emptyForm));
       console.log("submitted");
       setIsInputTouched(false);
     },
@@ -95,95 +78,20 @@ const AddClient = () => {
     }));
   }, [clientForm]);
 
+  useEffect(() => {
+    clientNewForm && setClientForm(clientNewForm);
+  }, [clientNewForm]);
+
   return (
     <form onSubmit={submitClientHandler} className="rounded-xl bg-white p-4">
       <SectionTitle>Add Client</SectionTitle>
-      <div className="mt-2 flex">
-        {isInitLoading ? (
-          <Skeleton className="skeleton-input-radius skeleton-image border-2 border-dashed" />
-        ) : (
-          <ImageUpload
-            keyName="imageUpload"
-            url={clientForm.image}
-            className={imageUploadClasses}
-            onImageChange={imageChangeHandler}
-          />
-        )}
-        <div className="flex-1 pl-3">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonLargeStyle} />
-          ) : (
-            <input
-              placeholder="Client name"
-              className={
-                !validForm.clientName && isInputTouched
-                  ? defaultInputLargeInvalidStyle
-                  : defaultInputLargeStyle
-              }
-              disabled={isInitLoading}
-              value={clientForm.clientName}
-              onChange={(e) => clientInputFieldHandler(e, "clientName")}
-            />
-          )}
-        </div>
-      </div>
-      <div className="mt-2 flex">
-        <div className="flex-1 ">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonNormalStyle} />
-          ) : (
-            <input
-              placeholder="Email address"
-              className={
-                !validForm.email && isInputTouched
-                  ? defaultInputInvalidStyle
-                  : defaultInputStyle
-              }
-              disabled={isInitLoading}
-              value={clientForm.email}
-              onChange={(e) => clientInputFieldHandler(e, "email")}
-            />
-          )}
-        </div>
-      </div>
-      <div className="mt-2 flex">
-        <div className="flex-1 ">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonNormalStyle} />
-          ) : (
-            <input
-              placeholder="Mobile No."
-              className={
-                !validForm.mobileNo && isInputTouched
-                  ? defaultInputInvalidStyle
-                  : defaultInputStyle
-              }
-              disabled={isInitLoading}
-              value={clientForm.mobileNo}
-              onChange={(e) => clientInputFieldHandler(e, "mobileNo")}
-            />
-          )}
-        </div>
-      </div>
-      <div className="mt-2 flex">
-        <div className="flex-1 ">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonNormalStyle} />
-          ) : (
-            <input
-              placeholder="Billing address"
-              className={
-                !validForm.address && isInputTouched
-                  ? defaultInputInvalidStyle
-                  : defaultInputStyle
-              }
-              disabled={isInitLoading}
-              value={clientForm.address}
-              onChange={(e) => clientInputFieldHandler(e, "address")}
-            />
-          )}
-        </div>
-      </div>
+      <ClientInputFields
+        clientForm={clientForm}
+        validForm={validForm}
+        onClientInput={clientInputFieldHandler}
+        onImageChange={imageChangeHandler}
+        isInputTouched={isInputTouched}
+      />
       <div className="mt-2">
         <Button type="submit" block="true">
           <span className="ml-2 inline-block ">Submit</span>

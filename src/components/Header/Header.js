@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header
-      className={`z-12 fixed z-10 flex w-full items-center border-slate-50 bg-white pr-3 transition-all dark:bg-slate-700 ${classes} shadow-md`}
+      className={`z-12 fixed z-10 flex w-full items-center border-slate-50 bg-white pr-3 transition-all dark:bg-slate-900 ${classes} shadow-md`}
     >
       <motion.button
         className="ml-1 rounded-full p-2 focus:outline-none dark:text-sky-100 md:ml-2 md:focus:ring md:focus:ring-blue-400"

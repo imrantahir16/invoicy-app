@@ -4,7 +4,11 @@ import Button from "../UI/Button";
 import { nanoid } from "nanoid";
 import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct, resetProductForm } from "../../store/productsSlice";
+import {
+  addProduct,
+  resetProductForm,
+  getNewForm,
+} from "../../store/productsSlice";
 import ProductInputFields from "./ProductInputFields";
 
 const emptyForm = {
@@ -18,7 +22,7 @@ const emptyForm = {
 
 const AddProduct = () => {
   const dispatch = useDispatch();
-  const productNewForm = useSelector((state) => state.products.newForm);
+  const productNewForm = useSelector(getNewForm);
   const [productForm, setProductForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
 
@@ -31,8 +35,6 @@ const AddProduct = () => {
   const imageChangeHandler = useCallback((str) => {
     // setting client form
     setProductForm((prev) => ({ ...prev, image: str }));
-    // dispatching client form field of image
-    // console.log(str);
   }, []);
 
   const productInputFieldHandler = (event, keyName) => {
@@ -41,8 +43,6 @@ const AddProduct = () => {
     setProductForm((prev) => {
       return { ...prev, [keyName]: value };
     });
-
-    //dispatch client data
   };
 
   const submitProductHandler = useCallback(
@@ -56,7 +56,6 @@ const AddProduct = () => {
 
         return;
       }
-      // console.log({ ...productForm, id: nanoid() });
       dispatch(addProduct({ ...productForm, id: nanoid() }));
       dispatch(resetProductForm(emptyForm));
       console.log("submitted");

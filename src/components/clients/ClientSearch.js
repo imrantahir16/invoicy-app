@@ -10,8 +10,8 @@ import { defaultSearchStyle } from "../../constants/defaultStyles";
 
 const ClientSearch = ({ searchForm, onSearch }) => {
   return (
-    <div className="mb-2 rounded-xl bg-white p-3 shadow-sm">
-      <span className="mb-2 font-title">Advanced Search</span>
+    <div className="mb-2 rounded-xl bg-white p-3 shadow-sm dark:bg-slate-900">
+      <span className="mb-2 font-title dark:text-sky-100">Advanced Search</span>
       <div className="mt-2 flex w-full flex-col sm:flex-row">
         <div className="text-default-color mb-2 flex flex-1 flex-row px-2 font-title sm:mb-0 sm:text-left">
           <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-gray-100">

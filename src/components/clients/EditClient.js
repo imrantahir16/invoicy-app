@@ -1,33 +1,33 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setEditedId,
+  getAllClients,
   getEditedId,
-  getAllProducts,
-  onConfirmEditProduct,
-} from "../../store/productsSlice";
+  setEditedId,
+  onConfirmEditClient,
+} from "../../store/clientsSlice";
+import SectionTitle from "../common/SectionTitle";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
-import ProductInputFields from "./ProductInputFields";
-import { isNotEmpty, isNotZero } from "../../utilities/utilities";
-import SectionTitle from "../common/SectionTitle";
+import ClientInputFields from "./ClientInputFields";
+import { emailRegex, phoneRegex, isNotEmpty } from "../../utilities/utilities";
 
 const emptyForm = {
   id: "",
   image: "",
-  productID: "",
-  productName: "",
-  price: 0,
-  quantity: 0,
+  clientName: "",
+  email: "",
+  mobileNo: "",
+  address: "",
 };
 
-const EditProduct = ({ onClose }) => {
+const EditClient = ({ onClose }) => {
   const dispatch = useDispatch();
   const editedId = useSelector(getEditedId);
-  const products = useSelector(getAllProducts);
-  const [productForm, setProductForm] = useState(emptyForm);
+  const clients = useSelector(getAllClients);
+  const [clientForm, setClientForm] = useState(emptyForm);
   const [isInputTouched, setIsInputTouched] = useState(false);
   const [validForm, setValidForm] = useState(
     Object.keys(emptyForm).reduce((a, b) => {
@@ -40,17 +40,17 @@ const EditProduct = ({ onClose }) => {
     onClose();
   }, [dispatch, onClose]);
 
-  const productInputFieldHandler = (event, keyName) => {
+  const clientInputFieldHandler = (event, keyName) => {
     const value = event.target.value;
 
-    setProductForm((prev) => {
+    setClientForm((prev) => {
       return { ...prev, [keyName]: value };
     });
   };
 
   const imageChangeHandler = useCallback((str) => {
     // setting client form
-    setProductForm((prev) => ({ ...prev, image: str }));
+    setClientForm((prev) => ({ ...prev, image: str }));
   }, []);
 
   const submitFormHandler = useCallback(
@@ -62,54 +62,57 @@ const EditProduct = ({ onClose }) => {
         console.log("not Valid");
         return;
       }
-      dispatch(onConfirmEditProduct(productForm));
+      dispatch(onConfirmEditClient(clientForm));
       onClose();
       setIsInputTouched(false);
     },
-    [validForm, dispatch, productForm, onClose]
+    [validForm, dispatch, clientForm, onClose]
   );
 
   useEffect(() => {
+    const isValidEmail =
+      isNotEmpty(clientForm?.email) && clientForm.email.match(emailRegex);
+    const isValidPhone =
+      isNotEmpty(clientForm?.mobileNo) && clientForm.mobileNo.match(phoneRegex);
+
     setValidForm((prev) => ({
       id: true,
       image: true,
-      productID: isNotEmpty(productForm?.productID),
-      productName: isNotEmpty(productForm?.productName),
-      price: isNotZero(productForm?.price),
-      quantity: isNotZero(productForm?.quantity),
+      clientName: isNotEmpty(clientForm?.clientName),
+      email: isValidEmail,
+      address: isNotEmpty(clientForm?.address),
+      mobile: isValidPhone,
     }));
-  }, [productForm]);
+  }, [clientForm]);
 
   useEffect(() => {
     if (editedId !== null) {
-      console.log("editing product");
-      const isFindIndex = products.findIndex(
-        (product) => product.id === editedId
-      );
+      console.log("editing client");
+      const isFindIndex = clients.findIndex((client) => client.id === editedId);
       if (isFindIndex !== -1) {
-        setProductForm({ ...products[isFindIndex] });
+        setClientForm({ ...clients[isFindIndex] });
       }
     }
-  }, [editedId, products]);
+  }, [editedId, clients]);
 
   return (
     <Modal onClose={onCloseHandler}>
       <form onSubmit={submitFormHandler}>
         <ModalContent>
           <div className="mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <SectionTitle>Edit product</SectionTitle>
-            <ProductInputFields
-              productForm={productForm}
+            <SectionTitle>Edit Client</SectionTitle>
+            <ClientInputFields
+              clientForm={clientForm}
               validForm={validForm}
+              onClientInput={clientInputFieldHandler}
               onImageChange={imageChangeHandler}
-              onProductInput={productInputFieldHandler}
               isInputTouched={isInputTouched}
             />
           </div>
         </ModalContent>
         <ModalActions>
           <Button type="submit">Confirm</Button>
-          <Button outlined={1} secondary={1} onClick={onCloseHandler}>
+          <Button outlined={"true"} secondary={"true"} onClick={onCloseHandler}>
             Cancel
           </Button>
         </ModalActions>
@@ -118,4 +121,4 @@ const EditProduct = ({ onClose }) => {
   );
 };
 
-export default EditProduct;
+export default EditClient;
