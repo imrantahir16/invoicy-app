@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   setEditedId,
   getEditedId,
@@ -59,9 +60,17 @@ const EditProduct = ({ onClose }) => {
       setIsInputTouched(true);
       const isValid = Object.keys(validForm).every((key) => validForm[key]);
       if (!isValid) {
-        console.log("not Valid");
+        toast.error("Invalid product detail", {
+          position: "bottom-center",
+          autoClose: 2000,
+        });
+
         return;
       }
+      toast.success("Successfully updated!", {
+        position: "bottom-center",
+        autoClose: 2000,
+      });
       dispatch(onConfirmEditProduct(productForm));
       onClose();
       setIsInputTouched(false);

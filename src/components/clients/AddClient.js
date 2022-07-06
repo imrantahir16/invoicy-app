@@ -1,15 +1,16 @@
 import React, { useCallback, useState, useEffect } from "react";
-import SectionTitle from "../common/SectionTitle";
-import Button from "../UI/Button";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { nanoid } from "nanoid";
-import { emailRegex, phoneRegex, isNotEmpty } from "../../utilities/utilities";
 import {
   addNewClient,
   resetClientForm,
   getNewForm,
 } from "../../store/clientsSlice";
+import SectionTitle from "../common/SectionTitle";
+import Button from "../UI/Button";
 import ClientInputFields from "./ClientInputFields";
+import { emailRegex, phoneRegex, isNotEmpty } from "../../utilities/utilities";
 
 const emptyForm = {
   id: "",
@@ -51,15 +52,22 @@ const AddClient = () => {
 
       const isValid = Object.keys(validForm).every((key) => validForm[key]);
       if (!isValid) {
-        console.log("not Valid");
+        toast.error("Invalid client details", {
+          position: "bottom-center",
+          autoClose: 2000,
+        });
         return;
       }
+      toast.success("Client Added!", {
+        position: "bottom-center",
+        autoClose: 2000,
+      });
       dispatch(addNewClient({ ...clientForm, id: nanoid() }));
       dispatch(resetClientForm(emptyForm));
       console.log("submitted");
       setIsInputTouched(false);
     },
-    [validForm, clientForm]
+    [validForm, clientForm, dispatch]
   );
 
   useEffect(() => {

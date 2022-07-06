@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import AppContainer from "./components/container/AppContainer";
 import HomePage from "./pages/HomePage";
 import ClientsPage from "./pages/clients/ClientsPage";
@@ -31,6 +32,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppContainer>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

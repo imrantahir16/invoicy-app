@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   getAllClients,
   getEditedId,
@@ -59,9 +60,17 @@ const EditClient = ({ onClose }) => {
       setIsInputTouched(true);
       const isValid = Object.keys(validForm).every((key) => validForm[key]);
       if (!isValid) {
-        console.log("not Valid");
+        toast.error("Invalid client details", {
+          position: "bottom-center",
+          autoClose: 2000,
+        });
         return;
       }
+
+      toast.success("Successfully updated!", {
+        position: "bottom-center",
+        autoClose: 2000,
+      });
       dispatch(onConfirmEditClient(clientForm));
       onClose();
       setIsInputTouched(false);

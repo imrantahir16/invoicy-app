@@ -1,15 +1,16 @@
 import React, { useState, useCallback, useEffect } from "react";
-import SectionTitle from "../common/SectionTitle";
-import Button from "../UI/Button";
-import { nanoid } from "nanoid";
-import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { nanoid } from "nanoid";
 import {
   addProduct,
   resetProductForm,
   getNewForm,
 } from "../../store/productsSlice";
+import Button from "../UI/Button";
+import SectionTitle from "../common/SectionTitle";
 import ProductInputFields from "./ProductInputFields";
+import { isNotEmpty, isNotZero } from "../../utilities/utilities";
 
 const emptyForm = {
   id: "",
@@ -52,10 +53,16 @@ const AddProduct = () => {
 
       const isValid = Object.keys(validForm).every((key) => validForm[key]);
       if (!isValid) {
-        console.log("not Valid");
-
+        toast.error("Invalid product details", {
+          position: "bottom-center",
+          autoClose: 2000,
+        });
         return;
       }
+      toast.success("Product Added!", {
+        position: "bottom-center",
+        autoClose: 2000,
+      });
       dispatch(addProduct({ ...productForm, id: nanoid() }));
       dispatch(resetProductForm(emptyForm));
       console.log("submitted");
