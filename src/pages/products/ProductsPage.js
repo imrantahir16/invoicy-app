@@ -6,7 +6,7 @@ import ProductTable from "../../components/products/ProductTable";
 const ProductsPage = () => {
   return (
     <>
-      <div className="p-4">
+      <div className="p-3">
         <PageTitle title="Products" />
       </div>
       <div className="flex flex-wrap">

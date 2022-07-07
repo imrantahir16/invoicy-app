@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
@@ -24,6 +25,10 @@ const DeleteClient = ({ onClose }) => {
   const onDeleteConfirmHandler = useCallback(() => {
     dispatch(onConfirmDeleteClient());
     onClose();
+    toast.success("Successfully Deleted", {
+      position: "bottom-center",
+      autoClose: 2000,
+    });
   }, [dispatch, onClose]);
 
   return (

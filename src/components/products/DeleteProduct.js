@@ -1,5 +1,8 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 import {
   setDeletedId,
   getDeletedId,
@@ -9,8 +12,6 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const DeleteProduct = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,10 @@ const DeleteProduct = ({ onClose }) => {
   const onDeleteConfirmHandler = useCallback(() => {
     dispatch(onConfirmDeleteProduct());
     onClose();
+    toast.success("Successfully Deleted", {
+      position: "bottom-center",
+      autoClose: 2000,
+    });
   }, [dispatch, onClose]);
 
   return (

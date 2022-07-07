@@ -6,7 +6,7 @@ import PageTitle from "../../components/common/PageTitle";
 const ClientsPage = () => {
   return (
     <div>
-      <div className="p-4">
+      <div className="p-3">
         <PageTitle title="Clients" />
       </div>
       <div className="flex flex-wrap">
