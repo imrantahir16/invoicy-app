@@ -36,16 +36,16 @@ const Button = (props) => {
           " border border-green-500 text-green-600 focus:ring-green-600 ";
       } else if (secondary) {
         defaultClasses +=
-          " border border-gray-400 text-gray-600 focus:ring-gray-600 ";
+          " border border-slate-400 text-slate-600 focus:ring-slate-600 ";
       } else if (danger) {
         defaultClasses +=
-          " border border-red-400 text-red-500 focus:ring-red-500 ";
+          " border border-rose-400 text-rose-500 focus:ring-rose-500 ";
       }
     } else {
       if (success) {
         defaultClasses += " bg-green-500 focus:ring-green-600";
       } else if (secondary) {
-        defaultClasses += " bg-gray-400 focus:ring-gray-500";
+        defaultClasses += " bg-slate-400 focus:ring-slate-500";
       } else if (danger) {
         defaultClasses += " bg-red-500 focus:ring-red-600";
       } else {
@@ -54,6 +54,7 @@ const Button = (props) => {
     }
     return defaultClasses;
   }, [block, size, outlined, success, secondary, danger]);
+
   return (
     <motion.button
       type={type}

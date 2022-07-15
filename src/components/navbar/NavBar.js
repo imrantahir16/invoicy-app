@@ -12,6 +12,8 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import InvoicyIcon from "../InvoicyIcon/InvoicyIcon";
+import Skeleton from "react-loading-skeleton";
+import CompanyWidget from "../company/CompanyWidget";
 
 const NAV_DATA = [
   {
@@ -81,6 +83,8 @@ const NavBar = () => {
           Invoicy
         </motion.span>
       </div>
+      <CompanyWidget />
+
       <ul className="mt-4">
         {NAV_DATA.map(({ title, link, icon }) => {
           return (

@@ -121,7 +121,7 @@ const EditClient = ({ onClose }) => {
         </ModalContent>
         <ModalActions>
           <Button type="submit">Confirm</Button>
-          <Button outlined={"true"} secondary={"true"} onClick={onCloseHandler}>
+          <Button outlined={1} secondary={1} onClick={onCloseHandler}>
             Cancel
           </Button>
         </ModalActions>
