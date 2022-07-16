@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import SectionTitle from "../common/SectionTitle";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
@@ -6,13 +6,15 @@ import ModalActions from "../UI/ModalActions";
 import ModalContent from "../UI/ModalContent";
 
 const CompanyModal = ({ onClose, company }) => {
-  const onCloseHandler = useCallback(() => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("submitted");
     onClose();
-  }, [onClose]);
+  };
 
   return (
     <Modal onClose={onClose}>
-      <form>
+      <form onSubmit={submitHandler}>
         <ModalContent>
           <div className="mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left">
             <SectionTitle>Add Company</SectionTitle>
@@ -21,7 +23,7 @@ const CompanyModal = ({ onClose, company }) => {
         </ModalContent>
         <ModalActions>
           <Button type="submit">Submit</Button>
-          <Button outlined={1} secondary={1} onClick={onCloseHandler}>
+          <Button outlined={1} secondary={1} onClick={onClose}>
             Cancel
           </Button>
         </ModalActions>
