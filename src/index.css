@@ -138,14 +138,11 @@ br {
 }
 
 .modal-container {
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 28vw;
+  z-index: 30;
+  position: absolute;
 }
 
 /* .fixed-body-scroll {

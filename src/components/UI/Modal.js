@@ -3,10 +3,14 @@ import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
 
 const Backdrop = (props) => {
+  const clickedBackdrop = () => {
+    props.onClose();
+    console.log("backdrop clicked");
+  };
   return (
     <div
       className="fixed inset-0 z-20 h-screen w-full bg-black/75"
-      onClick={props.onClose}
+      onClick={clickedBackdrop}
     />
   );
 };
@@ -20,11 +24,13 @@ const ModalOverlay = (props) => {
       aria-modal="true"
       initial={{
         opacity: 0,
-        translateY: "-2rem",
+        translateX: "-50%",
+        translateY: "-55%",
       }}
       animate={{
         opacity: 1,
-        translateY: 0,
+        translateX: "-50%",
+        translateY: "-50%",
       }}
       transition={{
         type: "spring",
@@ -32,11 +38,9 @@ const ModalOverlay = (props) => {
         damping: 15,
       }}
     >
-      <div className="fixed inset-0 z-30 overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className="transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            {props.children}
-          </div>
+      <div className="flex min-w-max items-end justify-center bg-blue-300 text-center sm:items-center sm:p-0">
+        <div className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+          {props.children}
         </div>
       </div>
     </motion.div>
