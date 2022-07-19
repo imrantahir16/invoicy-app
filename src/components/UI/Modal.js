@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 const Backdrop = (props) => {
   const clickedBackdrop = () => {
     props.onClose();
-    console.log("backdrop clicked");
   };
   return (
     <div
@@ -24,13 +23,11 @@ const ModalOverlay = (props) => {
       aria-modal="true"
       initial={{
         opacity: 0,
-        translateX: "-50%",
-        translateY: "-55%",
+        translateY: "-3rem",
       }}
       animate={{
         opacity: 1,
-        translateX: "-50%",
-        translateY: "-50%",
+        translateY: 0,
       }}
       transition={{
         type: "spring",
@@ -38,11 +35,7 @@ const ModalOverlay = (props) => {
         damping: 15,
       }}
     >
-      <div className="flex min-w-max items-end justify-center bg-blue-300 text-center sm:items-center sm:p-0">
-        <div className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
-          {props.children}
-        </div>
-      </div>
+      <div>{props.children}</div>
     </motion.div>
   );
 };

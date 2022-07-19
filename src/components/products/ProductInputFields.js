@@ -83,44 +83,54 @@ const ProductInputFields = ({
           )}
         </div>
       </div>
-      <div className="mt-2 flex">
-        <div className="flex-1">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonNormalStyle} />
-          ) : (
-            <input
-              className={
-                !validForm.price && isInputTouched
-                  ? defaultInputInvalidStyle
-                  : defaultInputStyle
-              }
-              placeholder="Price"
-              type="number"
-              value={productForm.price}
-              onChange={(e) => onProductInput(e, "price")}
-              disabled={isInitLoading}
-            />
-          )}
+      <div className="mt-2">
+        <div className="text-default-color font-title text-sm">
+          Product Price
+        </div>
+        <div className="flex">
+          <div className="flex-1">
+            {isInitLoading ? (
+              <Skeleton className={defaultSkeletonNormalStyle} />
+            ) : (
+              <input
+                className={
+                  !validForm.price && isInputTouched
+                    ? defaultInputInvalidStyle
+                    : defaultInputStyle
+                }
+                placeholder="Price"
+                type="number"
+                value={productForm.price}
+                onChange={(e) => onProductInput(e, "price")}
+                disabled={isInitLoading}
+              />
+            )}
+          </div>
         </div>
       </div>
-      <div className="mt-2 flex">
-        <div className="flex-1">
-          {isInitLoading ? (
-            <Skeleton className={defaultSkeletonNormalStyle} />
-          ) : (
-            <input
-              className={
-                !validForm.quantity && isInputTouched
-                  ? defaultInputInvalidStyle
-                  : defaultInputStyle
-              }
-              placeholder="Quantity"
-              type="number"
-              value={productForm.quantity}
-              onChange={(e) => onProductInput(e, "quantity")}
-              disabled={isInitLoading}
-            />
-          )}
+      <div className="mt-2">
+        <div className="text-default-color font-title text-sm">
+          Product Quantity
+        </div>
+        <div className="flex">
+          <div className="flex-1">
+            {isInitLoading ? (
+              <Skeleton className={defaultSkeletonNormalStyle} />
+            ) : (
+              <input
+                className={
+                  !validForm.quantity && isInputTouched
+                    ? defaultInputInvalidStyle
+                    : defaultInputStyle
+                }
+                placeholder="Quantity"
+                type="number"
+                value={productForm.quantity}
+                onChange={(e) => onProductInput(e, "quantity")}
+                disabled={isInitLoading}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

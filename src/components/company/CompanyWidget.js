@@ -1,33 +1,29 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPlus, faPen } from "@fortawesome/free-solid-svg-icons";
 import CompanyModal from "./CompanyModal";
-
-const company = {
-  imageUrl: "../../logo512.png",
-  name: "Digitronic",
-};
-const companyData = true;
-// const companyData = false;
+import { getCompanyData } from "../../store/companySlice";
 
 const CompanyWidget = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const company = useSelector(getCompanyData);
+
+  const companyData = company.image && company.companyName;
 
   const closeModalHandler = () => {
-    console.log("closed");
     setIsModalOpen(false);
   };
 
   const openModalHandler = () => {
-    console.log("opened");
     setIsModalOpen(true);
   };
 
   return (
     <>
       {isModalOpen && (
-        <CompanyModal company={company} onClose={closeModalHandler} />
+        <CompanyModal companyData={companyData} onClose={closeModalHandler} />
       )}
       <motion.div
         className="flex select-none items-center rounded-xl bg-blue-50/60 px-2 py-3"
@@ -62,11 +58,11 @@ const CompanyWidget = () => {
           <>
             <img
               className="h-14 w-14 rounded-xl"
-              src={company.imageUrl}
+              src={company.image}
               alt="company logo"
             />
             <span className="flex flex-1 items-center overflow-hidden text-ellipsis whitespace-nowrap py-1 pl-2 font-title font-medium text-slate-800">
-              {company.name}
+              {company.companyName}
             </span>
 
             <button
