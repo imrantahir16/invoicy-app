@@ -25,7 +25,7 @@ const INVOICE_DUMMY = [
     status: "Paid",
   },
 ];
-const InvoicesTable = ({ advanceSearch }) => {
+const InvoicesTable = ({ advanceSearch = false, itemsPerPage = 10 }) => {
   return (
     <>
       {advanceSearch && <InvoiceSearch searchForm={{}} onSearch={() => {}} />}

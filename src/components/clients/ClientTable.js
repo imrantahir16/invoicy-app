@@ -13,14 +13,14 @@ import {
 import EditClient from "./EditClient";
 import DeleteClient from "./DeleteClient";
 
-const itemsPerPage = 10;
+// const itemsPerPage = 10;
 
 const emptySearchForm = {
   clientName: "",
   email: "",
   mobileNo: "",
 };
-const ClientTable = ({ advanceSearch = false }) => {
+const ClientTable = ({ advanceSearch = false, itemsPerPage = 10 }) => {
   const dispatch = useDispatch();
   const allClients = useSelector(getAllClients);
   const [searchForm, setSearchForm] = useState(emptySearchForm);
@@ -87,7 +87,7 @@ const ClientTable = ({ advanceSearch = false }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(clients.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(clients.length / itemsPerPage));
-  }, [itemOffset, clients]);
+  }, [itemOffset, clients, itemsPerPage]);
 
   return (
     <>

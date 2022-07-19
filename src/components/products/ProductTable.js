@@ -13,13 +13,11 @@ import {
 import EditProduct from "./EditProduct";
 import DeleteProduct from "./DeleteProduct";
 
-const itemsPerPage = 10;
-
 const emptySearchForm = {
   productID: "",
   productName: "",
 };
-const ProductTable = ({ advanceSearch = false }) => {
+const ProductTable = ({ advanceSearch = false, itemsPerPage = 10 }) => {
   const dispatch = useDispatch();
   const allProducts = useSelector(getAllProducts);
   const [searchForm, setSearchForm] = useState(emptySearchForm);
@@ -83,7 +81,7 @@ const ProductTable = ({ advanceSearch = false }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(products.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(products.length / itemsPerPage));
-  }, [itemOffset, products]);
+  }, [itemOffset, products, itemsPerPage]);
 
   return (
     <>

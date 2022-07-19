@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useAppContext } from "../../context/AppContext";
-import InvoicyIcon from "../InvoicyIcon/InvoicyIcon";
+import InvoicyIcon from "../LottieIcons/InvoicyIcon";
 import useDarkMode from "../../hooks/useDarkMode";
 const Header = () => {
   const { toggleNavBar, showNavBar } = useAppContext();

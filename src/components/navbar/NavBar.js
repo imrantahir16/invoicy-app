@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useAppContext } from "../../context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faHouseChimney,
   faFileLines,
@@ -11,8 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import InvoicyIcon from "../InvoicyIcon/InvoicyIcon";
-import Skeleton from "react-loading-skeleton";
+import InvoicyIcon from "../LottieIcons/InvoicyIcon";
 import CompanyWidget from "../company/CompanyWidget";
 
 const NAV_DATA = [
